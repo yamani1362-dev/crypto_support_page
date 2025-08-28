@@ -1,0 +1,11 @@
+# فایل: .github/FUNDING.yml
+
+github: []  # اگر اکانت GitHub خودت برای حمایت داری می‌تونی اضافه کنی
+patreon: [] # اگر حساب Patreon داری
+open_collective: [] # اگر از Open Collective استفاده می‌کنی
+ko_fi: []   # اگر از Ko-fi استفاده می‌کنی
+custom:
+  - type: bitcoin
+    address: bc1qexamplebitcoinaddress1234567890
+  - type: ethereum
+    address: 0xExampleEthereumAddress1234567890abcdef
