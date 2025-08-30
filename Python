@@ -1,0 +1,61 @@
+import json
+import os
+
+DATA_FILE = "finance_data.json"
+
+def load_data():
+    if os.path.exists(DATA_FILE):
+        with open(DATA_FILE, "r") as f:
+            return json.load(f)
+    return {"income": [], "expenses": []}
+
+def save_data(data):
+    with open(DATA_FILE, "w") as f:
+        json.dump(data, f, indent=4)
+
+def add_income(amount, source):
+    data = load_data()
+    data["income"].append({"amount": amount, "source": source})
+    save_data(data)
+    print("✅ درآمد ثبت شد.")
+
+def add_expense(amount, reason):
+    data = load_data()
+    data["expenses"].append({"amount": amount, "reason": reason})
+    save_data(data)
+    print("✅ هزینه ثبت شد.")
+
+def show_report():
+    data = load_data()
+    total_income = sum(item["amount"] for item in data["income"])
+    total_expenses = sum(item["amount"] for item in data["expenses"])
+    balance = total_income - total_expenses
+    
+    print("\n📊 گزارش مالی")
+    print(f"درآمد کل: {total_income}")
+    print(f"هزینه کل: {total_expenses}")
+    print(f"موجودی: {balance}")
+
+# مثال استفاده
+if __name__ == "__main__":
+    while True:
+        print("\n1. ثبت درآمد")
+        print("2. ثبت هزینه")
+        print("3. گزارش")
+        print("4. خروج")
+
+        choice = input("انتخاب کن: ")
+        if choice == "1":
+            amount = float(input("مبلغ درآمد: "))
+            source = input("منبع درآمد: ")
+            add_income(amount, source)
+        elif choice == "2":
+            amount = float(input("مبلغ هزینه: "))
+            reason = input("دلیل هزینه: ")
+            add_expense(amount, reason)
+        elif choice == "3":
+            show_report()
+        elif choice == "4":
+            break
+        else:
+            print("انتخاب نامعتبر ❌")
